@@ -18,6 +18,8 @@ import static util.Utils.*;
 
 public class Dashboard extends Form {
 
+    private static final int NAVIGATION_HORIZONTAL_GAP = 20;
+
     private GradientPanel backgroundPanel;
     private JPanel mainPanel;
     private Driver driver;
@@ -71,18 +73,26 @@ public class Dashboard extends Form {
         menuBar.setLayout(new BoxLayout(menuBar, BoxLayout.PAGE_AXIS));
         menuBar.setAlignmentX(SwingConstants.LEFT);
 
-        JLabel logo = new JLabel(APPLICATION_LABEL, JLabel.LEFT);
-        setLogo(logo, 40, 40);
+//        JLabel logo = new JLabel(APPLICATION_LABEL, JLabel.LEFT);
+        JLabel logo = new JLabel(APPLICATION_LABEL, JLabel.CENTER) {
+            @Override
+            public Dimension getPreferredSize() {
+                return new Dimension(300, 50);
+            }
+        };
+        setupLogo(logo, 40, 40);
 
         menuBar.add(logo);
-        menuBar.add(Box.createRigidArea(new Dimension(0, 5)));
+        menuBar.add(Box.createRigidArea(new Dimension(0, NAVIGATION_HORIZONTAL_GAP)));
         menuBar.add(createMenuOption(user.getName()));
-        menuBar.add(Box.createRigidArea(new Dimension(0, 5)));
+        menuBar.add(Box.createRigidArea(new Dimension(0, NAVIGATION_HORIZONTAL_GAP)));
         menuBar.add(createMenuOption("Home"));
-        menuBar.add(Box.createRigidArea(new Dimension(0, 5)));
+        menuBar.add(Box.createRigidArea(new Dimension(0, NAVIGATION_HORIZONTAL_GAP)));
         menuBar.add(createMenuOption("Homework"));
-        menuBar.add(Box.createRigidArea(new Dimension(0, 5)));
+        menuBar.add(Box.createRigidArea(new Dimension(0, NAVIGATION_HORIZONTAL_GAP)));
         menuBar.add(createMenuOption("Announcements"));
+        menuBar.add(Box.createRigidArea(new Dimension(0, NAVIGATION_HORIZONTAL_GAP)));
+        menuBar.add(createMenuOption("Calendar"));
 
         menuBar.setOpaque(false);
 
@@ -91,15 +101,30 @@ public class Dashboard extends Form {
 
     }
 
-    @Override
-    protected void setLogo(JLabel logo, int weight, int height) {
-        super.setLogo(logo, weight, height);
+//    @Override
+//    protected void setLogo(JLabel logo, int weight, int height) {
+//        BufferedImage labelImage = null;
+//
+//        try {
+//            labelImage = ImageIO.read(new File("src/assets/logo.png"));
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
+//
+//        logo.setIcon(new ImageIcon(getScaledImage(labelImage, weight, height)));
+//        logo.setForeground(Color.white);
+//        logo.setVerticalTextPosition(JLabel.CENTER);
+//        logo.setHorizontalTextPosition(JLabel.RIGHT);
+//        logo.setFont(fontNavigation);
+//        logo.setBorder(new EmptyBorder(0, 10, 0, 0));
+//        logo.setIconTextGap(20);
+//    }
 
-        logo.setVerticalTextPosition(JLabel.CENTER);
-        logo.setHorizontalTextPosition(JLabel.RIGHT);
+    private void setupLogo(JLabel logo, int weight, int height) {
+        logo.setForeground(Color.white);
+//        logo.setHorizontalTextPosition(JLabel.CENTER);
         logo.setFont(fontNavigation);
-//        logo.setForeground(Color.black);
-        logo.setBorder(new EmptyBorder(0, 0, 0, 0));
+        logo.setBorder(new EmptyBorder(0, 10, 0, 0));
     }
 
     private JLabel createMenuOption(String title) {
@@ -128,6 +153,9 @@ public class Dashboard extends Form {
                 case "Announcements" :
                     image = ImageIO.read(new File("src/assets/announcementsIcon.png"));
                     break;
+                case "Calendar" :
+                    image = ImageIO.read(new File("src/assets/calendarIcon.png"));
+                    break;
                 default :
                     image = ImageIO.read(new File("src/assets/profileIcon.png"));
             }
@@ -136,6 +164,8 @@ public class Dashboard extends Form {
         }
 
         menu.setIcon(new ImageIcon(getScaledImage(image, 40, 40)));
+        menu.setBorder(new EmptyBorder(0, 10, 0, 0));
+        menu.setIconTextGap(20);
 
         return menu;
     }
