@@ -71,7 +71,7 @@ public abstract class Form extends JFrame {
         BufferedImage labelImage = null;
 
         try {
-            labelImage = ImageIO.read(new File("src/assets/universityIcon.png"));
+            labelImage = ImageIO.read(new File(iconsPath + "universityIcon.png"));
         } catch (IOException e) {
             e.printStackTrace();
         }

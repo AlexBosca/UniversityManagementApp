@@ -10,6 +10,9 @@ public interface Utils {
     Font fontLabels = new Font("SansSerif", Font.BOLD, 12);
     Font fontButtons = new Font("SansSerif", Font.BOLD, 15);
     Font fontNavigation = new Font("SansSerif", Font.BOLD, 18);
+    Font fontTitleLabel = new Font("SansSerif", Font.BOLD, 25);
+
+    String iconsPath = "src/assets/";
 
     void setInputField(JTextField textField);
     void setInputLabels(JLabel label);
