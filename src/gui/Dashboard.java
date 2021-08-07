@@ -8,8 +8,7 @@ import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import java.awt.event.*;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -68,10 +67,12 @@ public class Dashboard extends Form {
         mainPanel.setBorder(new EmptyBorder(20,20, 20, 20));
 
         listPanel = new JPanel();
+        listPanel.setLayout(new BoxLayout(listPanel, BoxLayout.PAGE_AXIS));
 //        listPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         listPanel.setBackground(Color.white);
 
         detailsPanel = new JPanel();
+        detailsPanel.setLayout(new BoxLayout(detailsPanel, BoxLayout.PAGE_AXIS));
 //        detailsPanel.setBorder(new EmptyBorder(20, 20, 20, 20));
         detailsPanel.setBackground(Color.white);
 
@@ -187,7 +188,29 @@ public class Dashboard extends Form {
         menu.setIcon(new ImageIcon(getScaledImage(image, 40, 40)));
         menu.setBorder(new EmptyBorder(0, 10, 0, 0));
         menu.setIconTextGap(20);
+        menu.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                // TODO: call method to add all panel components
+                refreshFrame();
+            }
+        });
+        menu.addFocusListener(new FocusAdapter() {
+            @Override
+            public void focusGained(FocusEvent e) {
+                super.focusGained(e);
+            }
+        });
 
         return menu;
+    }
+
+    private void refreshFrame() {
+        this.revalidate();
+    }
+
+    // TODO: implement method to add specific components to panel
+    private void fillPanel(JPanel panel, String type) {
+
     }
 }
